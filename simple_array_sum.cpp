@@ -10,6 +10,6 @@ int main() {
     scanf("%d", &k);
     s += k;
   }
-  printf("%d", s);
+  printf("%d\n", s);
   return 0;
 }
