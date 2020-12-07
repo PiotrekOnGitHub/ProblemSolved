@@ -1,38 +1,52 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-vector<int> dgt(int n) {
-  vector<int> ret;
-  while (n > 0) {
-    ret.push_back(n % 10);
-    n = (int) n / 10;
+#define vs vector<string>
+
+void cn(char c, int* T) {
+  switch(c) {
+    case '1':
+      T[0]++;
+      break;
+    case '2':
+      T[1]++;
+      break;
+    case '3':
+      T[2]++;
+      break;
+    case '4':
+      T[3]++;
+      break;
+    case '5':
+      T[4]++;
+      break;
   }
-  return ret;
 }
 
 int main() {
-  int l, r, ret = 0;
-  scanf("%d %d", &l, &r);
-  for (int i = l; i < r; i++) {
-    vector<int> d = dgt(i);
-    int *T = new int[d.size()];
-    for (int j = 0; j < d.size(); j++) {
-      if (d[j] != 0) {
-        if(i % d[j] == 0) {
-          T[j] = 1;
-        }
-      }
-    }
-    int c = 0;
-    for (int i = 0; i < d.size(); i++) {
-        if (T[i] == 1) {
-          c++;
-        }
-    }
-    if (c == d.size()) ret++;
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  const int L = 5;
+  int n;
+  vs strings;
+  cin >> n;
+  int A[5] = {0, 0, 0, 0, 0};
+  int B[5] = {0, 0, 0, 0, 0};
+  int C[5] = {0, 0, 0, 0, 0};
+  for (int i = 0; i < n; i++) {
+     string s; cin >> s;
+     strings.push_back(s);
+     if (s[1] == 'A') cn(s[0], A);
+     if (s[1] == 'B') cn(s[0], B);
+     if (s[1] == 'C') cn(s[0], C);
   }
-  printf("%d\n", ret);
-
+  int K = 0;
+  for (int i = 0; i < L - 1; i++) {
+    if (A[i] >= 1 && B[i] >= 1 && C[i] >= 1) {
+      K++;
+    }
+  }
+  if (A[L - 1] >= 2 && B[L - 1] >= 2 && C[L - 1] >= 2) K++;
+  cout << (K == 5 ? "TAK\n" : "NIE\n");
   return 0;
 }
